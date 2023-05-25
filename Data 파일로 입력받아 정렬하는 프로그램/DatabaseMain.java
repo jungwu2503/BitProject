@@ -1,22 +1,39 @@
 package bitedu.bipa.lesson2;
  
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
+//import java.sql.*;
+import java.util.*;
 
 public class DatabaseMain {
 	public static void main(String[] args) {
 		DatabaseMain main = new DatabaseMain();
+		main.testStart();
+		//main.makeTable();
+	}
+	
+	public void testStart() {
+		ArrayList<StudentDTO> data = this.readyData();
+		GisaQuiz quiz = new GisaQuiz(data);
+		String answer = quiz.solveQuiz1();
+	}
+	
+	private ArrayList<StudentDTO> readyData() {
+		ArrayList<StudentDTO> data = null;
+		// File 처리 대신 DB 처리
+		DatabaseWork work = new DatabaseWork();
+		data = work.getStudentData();
+		return data;
+	}
+
+	public void makeTable() {
 		try {
-			main.makeData();
+			this.makeData();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void makeData() throws IOException {
+	private void makeData() throws IOException{
 		// TODO Auto-generated method stub
 		ArrayList<StudentDTO> data = null;
 		//파일 접속
