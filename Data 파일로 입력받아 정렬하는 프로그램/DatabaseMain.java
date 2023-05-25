@@ -1,6 +1,7 @@
 package bitedu.bipa.lesson2;
  
 import java.io.*;
+import java.sql.SQLException;
 //import java.sql.*;
 import java.util.*;
 
@@ -15,13 +16,20 @@ public class DatabaseMain {
 		ArrayList<StudentDTO> data = this.readyData();
 		GisaQuiz quiz = new GisaQuiz(data);
 		String answer = quiz.solveQuiz1();
+		System.out.println(answer);
 	}
 	
 	private ArrayList<StudentDTO> readyData() {
 		ArrayList<StudentDTO> data = null;
 		// File 처리 대신 DB 처리
 		DatabaseWork work = new DatabaseWork();
-		data = work.getStudentData();
+		try {
+			data = work.getStudentData();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return data;
 	}
 

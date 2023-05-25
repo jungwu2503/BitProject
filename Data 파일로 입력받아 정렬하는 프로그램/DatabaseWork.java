@@ -79,7 +79,7 @@ public class DatabaseWork {
 	}
 	
 	public ArrayList<StudentDTO> getStudentData() throws ClassNotFoundException, SQLException {
-		ArrayList<StudentDTO> data = null;
+		ArrayList<StudentDTO> data = new ArrayList<StudentDTO>();
 		// DB의 데이터를 가져와서 List로 변경
 		
 		// Connection 생성
@@ -92,7 +92,18 @@ public class DatabaseWork {
 		ResultSet rs = stmt.executeQuery(sql);
 		while (rs.next()) {
 			// Query 결과 받고 처리하기 (List로 변경 작업)
-			
+			int stdNo = rs.getInt("std_no");
+			String email = rs.getString("email");
+			int kor = rs.getInt("kor");
+			int eng = rs.getInt("eng");
+			int math = rs.getInt("math");
+			int sci = rs.getInt("sci");
+			int hist = rs.getInt("hist");
+			int total = rs.getInt("total");
+			String mgrCode = rs.getString("mgr_code");
+			String accCode = rs.getString("acc_code");
+			String locCode = rs.getString("loc_code");
+			data.add(new StudentDTO(stdNo,email,kor,eng,math,sci,hist,total,mgrCode,accCode,locCode));		
 		}
 		// 통로 정리
 		stmt.close();
