@@ -1,12 +1,7 @@
 package bitedu.bipa.lesson3;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
 public class TestCenter {
 
@@ -16,8 +11,7 @@ public class TestCenter {
 			tc.startTest();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
+		}		
 	}
 	
 	public void startTest() throws IOException {
@@ -25,9 +19,9 @@ public class TestCenter {
 		System.out.println("시험을 시작합니다.");
 		GisaQuiz quiz = new GisaQuiz();
 		String answer = null;
-		answer = quiz.solveQuiz1();
+		answer = quiz.solveQuiz4();
 		System.out.println(answer);
-		this.submitAnswer(1, answer);
+		this.submitAnswer(4, answer);
 		System.out.println("답안지를 모두 제출합니다.");
 		System.out.println("시험을 종료합니다.");
 	}
@@ -36,7 +30,7 @@ public class TestCenter {
 		File file = new File("./data/Ans"+num+".txt");
 		FileWriter fw = new FileWriter(file);
 		PrintWriter pw = new PrintWriter(fw);
-		pw.println(answer);		
+		pw.println(answer);
 		pw.close();
 		fw.close();
 	}
