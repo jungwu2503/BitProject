@@ -1,0 +1,88 @@
+{
+	"data": {
+		"bookInfo": {
+			"expectingReturn": [
+				{
+					"bookSeq": "10",
+					"bookIsbn": "PM0000037912",
+					"bookTitle": "How to drink soju effectively",
+					"bookAuthor": "SuldenLion",
+					"userId": "user1",
+					"borrowStart": "2023-06-05",
+					"borrowEnd": "2023-06-18",
+					"returnDate": "-"
+				}
+			],
+			"list": [
+				{
+					"bookSeq": "3",
+					"bookIsbn": "PM0000037905",
+					"bookTitle": "How to be a great java programmer",
+					"bookAuthor": "SuldenTiger",
+					"userId": "user1",
+					"borrowStart": "2023-06-01",
+					"borrowEnd": "2023-06-14",
+					"returnDate": "-"
+				},
+				{
+					"bookSeq": "10",
+					"bookIsbn": "PM0000037912",
+					"bookTitle": "How to drink soju effectively",
+					"bookAuthor": "SuldenLion",
+					"userId": "user1",
+					"borrowStart": "2023-06-05",
+					"borrowEnd": "2023-06-18",
+					"returnDate": "-"
+				},
+				{
+					"bookSeq": "16",
+					"bookIsbn": "PM0000037918",
+					"bookTitle": "The greatest football player : SuldenLion",
+					"bookAuthor": "SuldenLion",
+					"userId": "user1",
+					"borrowStart": "2023-06-05",
+					"borrowEnd": "2023-06-18",
+					"returnDate": "2023-06-14"
+				}
+			],
+			"returned": [
+				{
+					"bookSeq": "16",
+					"bookIsbn": "PM0000037918",
+					"bookTitle": "The greatest football player : SuldenLion",
+					"bookAuthor": "SuldenLion",
+					"userId": "user1",
+					"borrowStart": "2023-06-05",
+					"borrowEnd": "2023-06-18",
+					"returnDate": "2023-06-14"
+				}
+			],
+			"notReturned": [
+				{
+					"bookSeq": "3",
+					"bookIsbn": "PM0000037905",
+					"bookTitle": "How to drink soju effectively",
+					"bookAuthor": "SuldenLion",
+					"userId": "user1",
+					"borrowStart": "2023-06-01",
+					"borrowEnd": "2023-06-14",
+					"returnDate": "-"
+				}
+			]
+		},
+		"userInfo": {
+			"user": [
+				{
+					"userId": "user1",
+					"userState": "대출정지",
+					"stopDate": "2023-06-18",
+					"totalUsingBook": "3",
+					"returnedBook": "1",
+					"notReturnedBook": "1",
+					"expectingReturnBook": "1",
+					"availableBook": "1"
+				}
+			]
+		}
+	}
+}
