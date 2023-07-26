@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.book">
+	<resultMap id="bookMap" type="bookCopyVO">
+		<id property="bookSeq" column="book_seq"></id>	
+		<result property="isbn" column="book_isbn"/>
+		<result property="title" column="book_title"/>
+		<result property="author" column="book_author"/>
+		<result property="publishDate" column="book_published_date"/>
+		<result property="bookPosition" column="book_position"/>
+		<result property="bookStaus" column="book_status"/>
+		<result property="bookImage" column="book_image"/>
+	</resultMap>
+	<select id="selectAllBook" resultMap="bookMap" resultType="bookCopyVO">
+		<![CDATA[
+			select a.*, b.* from book_info a inner join book_copy b on a.book_isbn=b.book_isbn
+		]]>
+	</select>
+	<select id="selectBookBySeq" resultMap="bookMap" resultType="bookCopyVO" parameterType="java.lang.Integer">
+		<![CDATA[
+			select a.*, b.* from book_info a inner join book_copy b on a.book_isbn=b.book_isbn 
+			where b.book_seq = #{bookSeq}
+		]]>
+	</select>
+	<select id="updateBook" parameterType="bookCopyVO">
+		<![CDATA[
+			update book_info set book_title = #{title}, book_author=#{author}, book_published_date = #{publishDate} where book_isbn = #{isbn}
+		]]>
+	</select>
+	<select id="updateBookImage" parameterType="bookCopyVO">
+		<![CDATA[
+			update book_copy c inner join book_info i
+			on c.book_isbn = i.book_isbn
+			set c.book_position = #{bookPosition}, c.book_status=#{bookStaus}, c.book_image=#{bookImage},
+			i.book_title=#{title}, i.book_author=#{author}, i.book_published_date=#{publishDate} where c.book_seq = #{bookSeq};
+		]]>
+	</select>
+	<select id="deleteBook" parameterType="java.lang.Integer">
+		<![CDATA[
+			delete from book_copy where book_seq = #{bookSeq}
+		]]>
+	</select>
+	<select id="insertBook" parameterType="bookCopyVO">
+		<![CDATA[
+			insert into book_info values (#{isbn},#{title},#{author},#{publishDate})
+		]]>
+	</select>
+	<select id="insertCopy" parameterType="bookCopyVO">
+		<![CDATA[
+			insert into book_copy(book_isbn, book_image) values (#{isbn}, #{bookImage})
+		]]>
+	</select>
+	<select id="selectCurrentPageData" resultMap="bookMap" resultType="bookCopyVO" parameterType="map"> <!-- parameterType에 java.util.HashMap아님 그냥 map -->
+		<![CDATA[
+			select i.*, c.* from book_info i
+			inner join book_copy c
+			on i.book_isbn=c.book_isbn limit #{start}, #{range}
+		]]>
+	</select> 
+	<select id="selectListSize" resultType="java.lang.Integer">
+		<![CDATA[
+			select count(*) from book_info i inner join book_copy c on i.book_isbn=c.book_isbn
+		]]>
+	</select>
+</mapper>
