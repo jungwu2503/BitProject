@@ -1,0 +1,10 @@
+create table simple_board(
+	seq integer primary key auto_increment,
+	title varchar(100) not null,
+	content varchar(1000) not null,
+	writer varchar(20) not null, -- id
+	read_count integer default 0,
+	create_date datetime not null,
+	password varchar(10),
+	attatch_data varchar(100)
+);
