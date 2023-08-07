@@ -1,0 +1,50 @@
+CREATE DATABASE `library_schema` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+CREATE TABLE `book_copy` (
+  `book_seq` int NOT NULL AUTO_INCREMENT,
+  `book_position` varchar(20) NOT NULL DEFAULT 'BS-0001',
+  `book_status` varchar(20) NOT NULL DEFAULT 'BM-0001',
+  `book_isbn` varchar(12) DEFAULT NULL,
+  `book_image` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`book_seq`),
+  KEY `book_isbn` (`book_isbn`),
+  CONSTRAINT `book_copy_ibfk_1` FOREIGN KEY (`book_isbn`) REFERENCES `book_info` (`book_isbn`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `book_info` (
+  `book_isbn` varchar(12) NOT NULL,
+  `book_title` varchar(200) NOT NULL,
+  `book_author` varchar(120) NOT NULL,
+  `book_published_date` date NOT NULL,
+  PRIMARY KEY (`book_isbn`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `book_use_status` (
+  `book_seq` int NOT NULL,
+  `user_id` varchar(10) NOT NULL,
+  `borrow_start` datetime NOT NULL,
+  `borrow_end` datetime NOT NULL,
+  `return_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`book_seq`,`user_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `book_use_status_ibfk_1` FOREIGN KEY (`book_seq`) REFERENCES `book_copy` (`book_seq`) ON DELETE CASCADE,
+  CONSTRAINT `book_use_status_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `book_user` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `book_user` (
+  `user_id` varchar(10) NOT NULL,
+  `user_pass` varchar(10) NOT NULL,
+  `user_name` varchar(10) NOT NULL,
+  `zip_code` varchar(10) DEFAULT NULL,
+  `addr1` varchar(20) DEFAULT NULL,
+  `addr2` varchar(20) DEFAULT NULL,
+  `user_birthday` datetime DEFAULT NULL,
+  `user_gender` char(1) DEFAULT '남',
+  `user_interest` varchar(50) DEFAULT NULL,
+  `user_introduce` varchar(50) DEFAULT NULL,
+  `user_phone_number` varchar(20) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
